@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
+import CartScreen from "./screens/CartScreen";
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,7 +22,9 @@ function App() {
             </Link>
           </div>
         </header>
-        <main></main>
+        <main>
+          <Route path="/cart" component={CartScreen}></Route>
+        </main>
         <footer className="row center">&copy; 2021. All right reserved</footer>
       </div>
     </BrowserRouter>
