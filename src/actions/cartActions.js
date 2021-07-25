@@ -12,11 +12,11 @@ export const addToCart =
     dispatch({
       type: CART_ADD_ITEM,
       payload: {
+        id: data.id,
         naziv: data.naziv,
         brand: data.brand,
         cijena: data.cijena,
         dostupnaKolicina: data.dostupnaKolicina,
-        id: data.id,
         kolicina: quantity,
       },
     });
