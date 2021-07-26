@@ -3,6 +3,7 @@ import {
   CART_REMOVE_ITEM,
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_ORDER_DETAILS,
+  CART_SAVE_DISCOUNT_CODE,
   CART_EMPTY,
 } from "../constants/cartConstants";
 import api from "../utils/api";
@@ -34,6 +35,10 @@ export const removeFromCart = (productId) => async (dispatch, getState) => {
 
 export const savePaymentMethod = (data) => async (dispatch) => {
   dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: data });
+};
+
+export const saveDiscountCode = (data) => async (dispatch) => {
+  dispatch({ type: CART_SAVE_DISCOUNT_CODE, payload: data });
 };
 
 export const removeAllFromCart = () => async (dispatch) => {

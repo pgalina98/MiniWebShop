@@ -11,6 +11,7 @@ const initalState = {
     ? localStorage.getItem("orderDetails")
     : {},
   paymentMethod: "Kartično",
+  discountCode: "",
 };
 
 const composeEnhancher = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

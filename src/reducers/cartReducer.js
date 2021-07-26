@@ -3,6 +3,7 @@ import {
   CART_EMPTY,
   CART_REMOVE_ITEM,
   CART_SAVE_ORDER_DETAILS,
+  CART_SAVE_DISCOUNT_CODE,
   CART_SAVE_PAYMENT_METHOD,
 } from "../constants/cartConstants";
 
@@ -36,6 +37,10 @@ export const cartReducer = (state = { cart: [] }, action) => {
 
     case CART_SAVE_PAYMENT_METHOD: {
       return { ...state, paymentMethod: action.payload };
+    }
+
+    case CART_SAVE_DISCOUNT_CODE: {
+      return { ...state, discountCode: action.payload };
     }
 
     case CART_EMPTY: {
