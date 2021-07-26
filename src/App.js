@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
+import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           </div>
         </header>
         <main>
+          <Route path="/" component={HomeScreen} exact></Route>
           <Route path="/cart" component={CartScreen}></Route>
         </main>
         <footer className="row center">&copy; 2021. All right reserved</footer>

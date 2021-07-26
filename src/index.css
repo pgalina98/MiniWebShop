@@ -206,11 +206,14 @@ img.large {
 /* Rating */
 .card__body__rating span {
   color: #f0c040;
-  margin: 0.1rem;
+  margin: 0.15rem;
+  font-size: 18px;
 }
 
 .card__body__rating span:last-child {
   color: #404040;
+  margin-left: 1rem;
+  font-size: 1.6rem;
 }
 
 /* Product details screen */
