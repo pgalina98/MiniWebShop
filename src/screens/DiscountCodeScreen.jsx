@@ -38,7 +38,6 @@ export default function DiscountCodeScreen(props) {
   const paymentDetails = useSelector((state) => state.paymentDetails);
   const [code, setCode] = useState("");
   const [discountCode, setDiscountCode] = useState([{}]);
-  const [continueAllowed, setContinueAllowed] = useState(false);
 
   if (!paymentDetails) {
     props.history.push("/payment");
