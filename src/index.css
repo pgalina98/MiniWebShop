@@ -199,6 +199,13 @@ img.large {
   margin-bottom: 0.5rem;
 }
 
+.card__body__footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .card__body__price {
   font-size: 2rem;
 }

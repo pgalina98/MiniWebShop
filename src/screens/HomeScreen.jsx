@@ -4,7 +4,6 @@ import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -32,11 +31,7 @@ const TabPanel = (props) => {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={2}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={2}>{children}</Box>}
     </div>
   );
 };
