@@ -34,6 +34,8 @@ const Product = ({ product }) => {
 
   const handleRemoveFromCart = () => {
     console.log("REMOVE PRODUCT FROM CART ", product.id);
+
+    dispatch(removeFromCart(product.id));
   };
 
   return (
