@@ -84,10 +84,6 @@ export default function DiscountCodeScreen(props) {
     }
   };
 
-  console.log("TEST ID-a: ", discountCode[0]?.id ? "IMA GA" : "NEMA GA");
-  console.log("HAVE? ", haveDiscountCode);
-  console.log("DC: ", discountCode);
-
   return (
     <div>
       <OrderCheckoutSteps step1 step2 step3 />
