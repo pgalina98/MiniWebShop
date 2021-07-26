@@ -21,6 +21,7 @@ const CartScreen = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
+<<<<<<< HEAD
   const handleRemoveFromCart = (cartItem) => {
     console.log("REMOVE PRODUCT FROM CART ", cartItem.id);
 
@@ -32,6 +33,11 @@ const CartScreen = () => {
   };
 
   console.log("CART: ", cart);
+=======
+  useEffect(() => {
+    console.log("CART: ", cart);
+  }, [cart]);
+>>>>>>> frontend
 
   return (
     <div className="row top">
