@@ -121,6 +121,14 @@ button.small {
   font-size: 1.3rem;
 }
 
+*:focus {
+  outline: none !important;
+}
+
+*:hover {
+  outline: none !important;
+}
+
 /* Header */
 header a {
   color: #fff;
