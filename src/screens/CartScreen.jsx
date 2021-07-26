@@ -8,17 +8,16 @@ import MessageBox from "../components/MessageBox";
 const CartScreen = (props) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
 
   useEffect(() => {
-    console.log("CART: ", cartItems);
-  }, [cartItems]);
+    console.log("CART: ", cart);
+  }, [cart]);
 
   return (
     <div className="row top">
       <div className="col-2">
         <h1>Shopping Cart</h1>
-        {cartItems.length === 0 ? (
+        {cart.length === 0 ? (
           <MessageBox>
             Cart is empty.{" "}
             <Link to="/">
