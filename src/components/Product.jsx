@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Product = ({ product }) => {
-  const dispatch = useDispatch();
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const isProductInCart = cart.filter((x) => x.id === product.id).length > 0;
@@ -29,7 +29,7 @@ const Product = ({ product }) => {
   const handleAddToCartClick = () => {
     console.log("ADD TO CART PRODUCT ", product.id);
 
-    dispatch(addToCart(product.id));
+    dispatch(addToCart(product.id, 1));
   };
 
   const handleRemoveFromCart = () => {

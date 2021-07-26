@@ -6,22 +6,24 @@ import {
 } from "../constants/cartConstants";
 import api from "../utils/api";
 
-export const addToCart = (productId) => async (dispatch, getState) => {
-  const { data } = await api.get(`/products/${productId}`);
+export const addToCart =
+  (productId, quantity) => async (dispatch, getState) => {
+    const { data } = await api.get(`/products/${productId}`);
 
-  dispatch({
-    type: CART_ADD_ITEM,
-    payload: {
-      id: data.id,
-      naziv: data.naziv,
-      brand: data.brand,
-      cijena: data.cijena,
-      dostupnaKolicina: data.dostupnaKolicina,
-    },
-  });
+    dispatch({
+      type: CART_ADD_ITEM,
+      payload: {
+        id: data.id,
+        naziv: data.naziv,
+        brand: data.brand,
+        cijena: data.cijena,
+        dostupnaKolicina: data.dostupnaKolicina,
+        kolicina: quantity,
+      },
+    });
 
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart));
-};
+    localStorage.setItem("cartItems", JSON.stringify(getState().cart));
+  };
 
 export const removeFromCart = (productId) => async (dispatch, getState) => {
   dispatch({ type: CART_REMOVE_ITEM, payload: productId });

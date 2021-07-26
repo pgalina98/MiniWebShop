@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
@@ -6,6 +7,8 @@ import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
 
 function App() {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <BrowserRouter>
       <div className="body__gridContainer">
@@ -20,6 +23,7 @@ function App() {
               <ShoppingCartIcon
                 style={{ height: "23px", width: "23px", marginRight: "15px" }}
               />
+              {cart.length > 0 && <span className="badge">{cart.length}</span>}
             </Link>
           </div>
         </header>
