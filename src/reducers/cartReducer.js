@@ -5,24 +5,26 @@ import {
   CART_SAVE_PAYMENT_METHOD,
 } from "../constants/cartConstants";
 
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (state = { cart: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM: {
       const item = action.payload;
 
-      const existItem = state.cartItems.find((x) => x.product === item.product);
+      console.log("REDUCER ITEM: ", item);
+      console.log("REDUCER STATE: ", state);
+
+      const existItem = state.cart.find((x) => x.id === item.id);
 
       if (existItem) {
         return {
           ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.product === existItem.product ? item : x
-          ),
+          cart: state.cart.map((x) => (x.id === existItem.id ? item : x)),
         };
       } else {
+        console.log("dodajem");
         return {
           ...state,
-          cartItems: [...state.cartItems, item],
+          cart: [...state.cart, item],
         };
       }
     }
@@ -30,9 +32,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case CART_REMOVE_ITEM: {
       return {
         ...state,
-        cartItems: state.cartItems.filter(
-          (item) => item.product !== action.payload
-        ),
+        cart: state.cart.filter((item) => item.id !== action.payload),
       };
     }
 
@@ -41,7 +41,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     }
 
     case CART_EMPTY: {
-      return { ...state, cartItems: [] };
+      return { ...state, cart: [] };
     }
 
     default:

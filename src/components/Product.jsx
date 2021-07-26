@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import Rating from "./Rating";
 import { makeStyles } from "@material-ui/core/styles";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Button from "@material-ui/core/Button";
+
+import { addToCart, removeFromCart } from "../actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -11,10 +14,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Product = ({ product }) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  console.log("PRODUCT: ", product);
 
   const handleAddToCartClick = (event) => {
     console.log("ADD TO CART PRODUCT ", product.id);
+
+    dispatch(addToCart(product.id));
   };
 
   return (
@@ -32,11 +40,12 @@ const Product = ({ product }) => {
           <Button
             variant="contained"
             color="primary"
+            disabled={product.dostupnaKolicina < 1}
             className={classes.button}
             endIcon={<AddShoppingCartIcon />}
             onClick={handleAddToCartClick}
           >
-            Add to Cart
+            {product.dostupnaKolicina < 1 ? "Out of Stock" : "Add to Cart"}
           </Button>
         </div>
       </div>

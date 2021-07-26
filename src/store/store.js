@@ -3,11 +3,10 @@ import thunk from "redux-thunk";
 import { cartReducer } from "../reducers/cartReducer";
 
 const initalState = {
-  cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : [],
-  },
+  cart: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
+
   paymentMethod: "Kartično",
 };
 
