@@ -16,7 +16,7 @@ const PlaceOrderScreen = (props) => {
   const discountCode = useSelector((state) => state.discountCode)[0];
 
   const paymentMethodID = paymentDetails.paymentMethod === "Kartično" ? 1 : 2;
-  const discountCodeID = discountCode.id ? discountCode.id : 0;
+  const discountCodeID = discountCode?.id ? discountCode.id : 0;
 
   const convertPrice = (number) => {
     return Number(number.toFixed(2));
@@ -27,8 +27,9 @@ const PlaceOrderScreen = (props) => {
   );
 
   cart.totalPrice = cart.itemsPrice;
+  cart.totalPriceWithDiscount = cart.itemsPrice;
 
-  if (discountCode) {
+  if (discountCode?.id) {
     cart.discount = cart.itemsPrice * discountCode.popust;
 
     cart.totalPriceWithDiscount = cart.totalPrice - cart.discount;
@@ -39,7 +40,7 @@ const PlaceOrderScreen = (props) => {
   const placeOrderHandler = () => {
     const saveNewOrder = async () => {
       let now = new Date();
-      var dateStringWithTime = moment(now).format("dd.MM.yyyy HH:mm:ss");
+      var dateStringWithTime = moment(now).format("DD.MM.yyyy HH:mm:ss");
 
       const order = {
         popustKodId: discountCodeID,
@@ -89,6 +90,8 @@ const PlaceOrderScreen = (props) => {
 
     props.history.push("/");
   };
+
+  console.log("CART: ", cart);
 
   return (
     <div>
@@ -169,13 +172,13 @@ const PlaceOrderScreen = (props) => {
               <li>
                 <div className="row">
                   <div>Items price</div>
-                  <div>{cart.itemsPrice.toFixed(2)} HRK</div>
+                  <div>{cart?.itemsPrice?.toFixed(2)} HRK</div>
                 </div>
                 <br />
                 <div className="row">
                   <div>Discount</div>
                   <div>
-                    {isNaN(discountCode.popust)
+                    {isNaN(discountCode?.popust)
                       ? "0"
                       : discountCode.popust * 100}{" "}
                     %
@@ -185,7 +188,7 @@ const PlaceOrderScreen = (props) => {
                 <div className="row">
                   <div>Discount amount</div>
                   <div>
-                    {isNaN(cart.discount.toFixed(2))
+                    {isNaN(cart?.discount?.toFixed(2))
                       ? "0"
                       : cart.discount.toFixed(2)}{" "}
                     HRK
@@ -201,7 +204,7 @@ const PlaceOrderScreen = (props) => {
                   </div>
                   <div>
                     <strong>
-                      {cart.totalPriceWithDiscount.toFixed(2)} HRK
+                      {cart?.totalPriceWithDiscount.toFixed(2)} HRK
                     </strong>
                   </div>
                 </div>

@@ -89,7 +89,7 @@ const HomeScreen = () => {
           )}
         </TabPanel>
         <TabPanel value={selectedTab} index={1} dir="x">
-          Item Two
+          TODO
         </TabPanel>
       </SwipeableViews>
     </Paper>
