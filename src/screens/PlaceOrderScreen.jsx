@@ -63,9 +63,7 @@ const PlaceOrderScreen = (props) => {
       console.log("ORDER: ", order);
 
       await api
-        .post("/orders", {
-          order,
-        })
+        .post("/orders", order)
         .then(({ data }) => {
           console.log("DATA: ", data);
           saveOrderProducts(data);
@@ -77,9 +75,7 @@ const PlaceOrderScreen = (props) => {
       console.log("ORDER FOR ADD PRODUCTS: ", createdOrder);
 
       await api
-        .post(`orders/${createdOrder.id}/products`, {
-          cart,
-        })
+        .post(`orders/${createdOrder.id}/products`, cart)
         .then(({ data }) => console.log("DATA: ", data))
         .catch((error) => console.log("ERROR: ", error));
     };

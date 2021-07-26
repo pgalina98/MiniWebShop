@@ -38,6 +38,7 @@ export default function DiscountCodeScreen(props) {
   const paymentDetails = useSelector((state) => state.paymentDetails);
   const [code, setCode] = useState("");
   const [discountCode, setDiscountCode] = useState([{}]);
+  const [continueAllowed, setContinueAllowed] = useState(false);
 
   if (!paymentDetails) {
     props.history.push("/payment");
@@ -69,12 +70,17 @@ export default function DiscountCodeScreen(props) {
         .catch((error) => console.log("ERROR: ", error));
     };
 
-    if (haveDiscountCode) {
+    if (haveDiscountCode === "true") {
       console.log("DISCOUNT CODE CHECK");
       checkIfDiscountExistsAndIsValid();
     }
 
-    props.history.push("/placeorder");
+    if (
+      (haveDiscountCode === "true" && discountCode[0]?.id) ||
+      haveDiscountCode === "false"
+    ) {
+      props.history.push("/placeorder");
+    }
   };
 
   return (
