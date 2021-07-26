@@ -7,6 +7,9 @@ const initalState = {
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
 
+  orderDetails: localStorage.getItem("orderDetails")
+    ? localStorage.getItem("orderDetails")
+    : {},
   paymentMethod: "Kartično",
 };
 

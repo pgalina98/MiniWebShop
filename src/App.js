@@ -5,6 +5,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
+import ShippingScreen from "./screens/ShippingScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -30,6 +31,7 @@ function App() {
         <main>
           <Route path="/" component={HomeScreen} exact></Route>
           <Route path="/cart" component={CartScreen}></Route>
+          <Route path="/shipping" component={ShippingScreen}></Route>
         </main>
         <footer className="row center">&copy; 2021. All right reserved</footer>
       </div>

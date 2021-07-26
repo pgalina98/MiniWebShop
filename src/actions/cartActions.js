@@ -2,6 +2,7 @@ import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
   CART_SAVE_PAYMENT_METHOD,
+  CART_SAVE_ORDER_DETAILS,
   CART_EMPTY,
 } from "../constants/cartConstants";
 import api from "../utils/api";
@@ -39,4 +40,9 @@ export const removeAllFromCart = () => async (dispatch) => {
   dispatch({ type: CART_EMPTY });
 
   localStorage.removeItem("cartItems");
+};
+
+export const saveOrderDetails = (data) => async (dispatch) => {
+  dispatch({ type: CART_SAVE_ORDER_DETAILS, payload: data });
+  localStorage.setItem("orderDetails", JSON.stringify(data));
 };

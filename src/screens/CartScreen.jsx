@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CartScreen = () => {
+const CartScreen = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -27,8 +27,10 @@ const CartScreen = () => {
     dispatch(removeFromCart(cartItem.id));
   };
 
-  const handleCartCheckout = () => {
+  const handleCheckoutOrder = () => {
     console.log("ORDER CHECKOUT ITEMS FROM CART");
+
+    props.history.push("/shipping");
   };
 
   console.log("CART: ", cart);
@@ -37,6 +39,7 @@ const CartScreen = () => {
     <div className="row top">
       <div className="col-2">
         <h1>Shopping Cart</h1>
+        <Divider />
         {cart.length === 0 ? (
           <MessageBox>
             Cart is empty.{" "}
@@ -94,6 +97,7 @@ const CartScreen = () => {
                       </Button>
                     </div>
                   </div>
+                  <Divider />
                 </li>
               );
             })}
@@ -119,7 +123,7 @@ const CartScreen = () => {
               </li>
             ))}
             <li>
-              <Divider variant="middle" />
+              <Divider />
               <h2>
                 Subtotal ({cart.reduce((a, c) => a + c.kolicina, 0)} items):{" "}
                 {cart.reduce((a, c) => a + c.cijena * c.kolicina, 0)} HRK
@@ -128,11 +132,11 @@ const CartScreen = () => {
             <li>
               <button
                 type="button"
-                onClick={handleCartCheckout}
+                onClick={handleCheckoutOrder}
                 className="primary block"
                 disabled={cart.length === 0}
               >
-                Proceed to Checkout
+                Proceed to Order
               </button>
             </li>
           </ul>
