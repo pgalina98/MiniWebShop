@@ -75,12 +75,18 @@ export default function DiscountCodeScreen(props) {
     }
 
     if (
-      (haveDiscountCode === "true" && discountCode[0]?.id) ||
+      (haveDiscountCode === "true" &&
+        discountCode[0]?.id &&
+        !discountCode[0]?.iskoristen) ||
       haveDiscountCode === "false"
     ) {
       props.history.push("/placeorder");
     }
   };
+
+  console.log("TEST ID-a: ", discountCode[0]?.id ? "IMA GA" : "NEMA GA");
+  console.log("HAVE? ", haveDiscountCode);
+  console.log("DC: ", discountCode);
 
   return (
     <div>
@@ -116,7 +122,7 @@ export default function DiscountCodeScreen(props) {
             />
           </RadioGroup>
         </FormControl>
-        {(discountCode.length === 0 || discountCode.iskoristen === true) && (
+        {(discountCode.length === 0 || discountCode[0].iskoristen === true) && (
           <MessageBox variant="danger">
             Discount Code is expired or invalid! Refresh page and try again.
           </MessageBox>
@@ -160,7 +166,9 @@ export default function DiscountCodeScreen(props) {
               (haveDiscountCode === "true" && code === "")
             }
           >
-            Continue
+            {haveDiscountCode === "true" && discountCode[0]?.id === undefined
+              ? "Procced discount code"
+              : "Continue"}
           </button>
         </div>
       </form>
