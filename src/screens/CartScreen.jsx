@@ -52,7 +52,7 @@ const CartScreen = (props) => {
           <ul>
             {cart.map((cartItem) => {
               return (
-                <li key={cartItem.id}>
+                <li key={cartItem.id + "ABCDE"}>
                   <div className="row">
                     <div>
                       <img
@@ -84,7 +84,7 @@ const CartScreen = (props) => {
                         )}
                       </select>
                     </div>
-                    <div>${cartItem.cijena}</div>
+                    <div>{cartItem.cijena} HRK</div>
                     <div>
                       <Button
                         variant="contained"

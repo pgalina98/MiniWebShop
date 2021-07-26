@@ -36,7 +36,7 @@ export const cartReducer = (state = { cart: [] }, action) => {
     }
 
     case CART_SAVE_PAYMENT_METHOD: {
-      return { ...state, paymentMethod: action.payload };
+      return { ...state, paymentDetails: action.payload };
     }
 
     case CART_SAVE_DISCOUNT_CODE: {
@@ -44,7 +44,7 @@ export const cartReducer = (state = { cart: [] }, action) => {
     }
 
     case CART_EMPTY: {
-      return { ...state, cart: [] };
+      return { ...state, cart: [], discountCode: {}, paymentDetails: {} };
     }
 
     case CART_SAVE_ORDER_DETAILS: {

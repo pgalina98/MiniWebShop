@@ -10,8 +10,14 @@ const initalState = {
   orderDetails: localStorage.getItem("orderDetails")
     ? localStorage.getItem("orderDetails")
     : {},
-  paymentMethod: "Kartično",
-  discountCode: "",
+
+  paymentDetails: localStorage.getItem("paymentDetails")
+    ? localStorage.getItem("paymentDetails")
+    : {},
+
+  discountCode: localStorage.getItem("discountCode")
+    ? localStorage.getItem("discountCode")
+    : {},
 };
 
 const composeEnhancher = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

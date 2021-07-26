@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
@@ -31,18 +31,26 @@ const useStyles = makeStyles(() => ({
 
 export default function DiscountCodeScreen(props) {
   const classes = useStyles();
+  const [haveDiscountCode, setHaveDiscountCode] = useState("false");
+  const [didMount, setDidMount] = useState(false);
+  const dispatch = useDispatch();
 
-  const paymentMethod = useSelector((state) => state.paymentMethod);
+  const paymentDetails = useSelector((state) => state.paymentDetails);
   const [code, setCode] = useState("");
   const [discountCode, setDiscountCode] = useState([{}]);
 
-  if (!paymentMethod) {
+  if (!paymentDetails) {
     props.history.push("/payment");
   }
 
-  const [haveDiscountCode, setHaveDiscountCode] = useState("false");
+  useEffect(() => {
+    setDidMount(true);
+    return () => setDidMount(false);
+  }, []);
 
-  const dispatch = useDispatch();
+  if (!didMount) {
+    return null;
+  }
 
   const handleChangeHaveDiscountCode = (event) => {
     setHaveDiscountCode(event.target.value);
@@ -56,13 +64,16 @@ export default function DiscountCodeScreen(props) {
         .get("/discount-codes")
         .then(({ data }) => {
           setDiscountCode(data.filter((item) => item.kod === code));
+          dispatch(saveDiscountCode(data.filter((item) => item.kod === code)));
         })
         .catch((error) => console.log("ERROR: ", error));
     };
 
-    checkIfDiscountExistsAndIsValid();
+    if (haveDiscountCode) {
+      console.log("DISCOUNT CODE CHECK");
+      checkIfDiscountExistsAndIsValid();
+    }
 
-    dispatch(saveDiscountCode(discountCode));
     props.history.push("/placeorder");
   };
 
@@ -100,9 +111,9 @@ export default function DiscountCodeScreen(props) {
             />
           </RadioGroup>
         </FormControl>
-        {discountCode.length === 0 && (
+        {(discountCode.length === 0 || discountCode.iskoristen === true) && (
           <MessageBox variant="danger">
-            Discount Code is expired or invalid! Refresh page and try again
+            Discount Code is expired or invalid! Refresh page and try again.
           </MessageBox>
         )}
         <div

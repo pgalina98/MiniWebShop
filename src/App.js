@@ -8,6 +8,7 @@ import CartScreen from "./screens/CartScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import DiscountCodeScreen from "./screens/DiscountCodeScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -36,6 +37,7 @@ function App() {
           <Route path="/shipping" component={ShippingScreen}></Route>
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/discountCode" component={DiscountCodeScreen}></Route>
+          <Route path="/placeorder" component={PlaceOrderScreen}></Route>
         </main>
         <footer className="row center">&copy; 2021. All right reserved</footer>
       </div>

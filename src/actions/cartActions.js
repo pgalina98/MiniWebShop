@@ -35,10 +35,14 @@ export const removeFromCart = (productId) => async (dispatch, getState) => {
 
 export const savePaymentMethod = (data) => async (dispatch) => {
   dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: data });
+
+  localStorage.setItem("paymentDetails", JSON.stringify(data));
 };
 
 export const saveDiscountCode = (data) => async (dispatch) => {
   dispatch({ type: CART_SAVE_DISCOUNT_CODE, payload: data });
+
+  localStorage.setItem("discountCode", JSON.stringify(data));
 };
 
 export const removeAllFromCart = () => async (dispatch) => {
@@ -49,5 +53,6 @@ export const removeAllFromCart = () => async (dispatch) => {
 
 export const saveOrderDetails = (data) => async (dispatch) => {
   dispatch({ type: CART_SAVE_ORDER_DETAILS, payload: data });
+
   localStorage.setItem("orderDetails", JSON.stringify(data));
 };
