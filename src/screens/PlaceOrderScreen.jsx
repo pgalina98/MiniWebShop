@@ -9,9 +9,7 @@ import api from "../utils/api";
 
 const PlaceOrderScreen = (props) => {
   const cart = useSelector((state) => state.cart);
-  const orderDetails = useSelector((state) =>
-    JSON.parse(JSON.stringify(state.orderDetails))
-  );
+  const orderDetails = useSelector((state) => state.orderDetails);
   const paymentDetails = useSelector((state) => state.paymentDetails);
   const discountCode = useSelector((state) => state.discountCode)[0];
 
@@ -87,8 +85,6 @@ const PlaceOrderScreen = (props) => {
     props.history.push("/");
   };
 
-  console.log("CART: ", cart);
-
   return (
     <div>
       <OrderCheckoutSteps step1 step2 step3 step4 />
@@ -101,15 +97,15 @@ const PlaceOrderScreen = (props) => {
                 <Divider />
                 <p>
                   <strong>Email address: </strong>
-                  {orderDetails.emailAddress}
+                  {JSON.parse(orderDetails).emailAddress}
                   <br />
                   <br />
                   <strong>Phone number: </strong>
-                  {orderDetails.phoneNumber}
+                  {JSON.parse(orderDetails).phoneNumber}
                   <br />
                   <br />
                   <strong>Shipping address: </strong>
-                  {orderDetails.shippingAddress}
+                  {JSON.parse(orderDetails).shippingAddress}
                 </p>
               </div>
             </li>
@@ -119,7 +115,7 @@ const PlaceOrderScreen = (props) => {
                 <Divider />
                 <p>
                   <strong>Payment Method: </strong>
-                  {paymentDetails.paymentMethod}
+                  {JSON.parse(paymentDetails).paymentMethod}
                 </p>
                 <br />
               </div>
