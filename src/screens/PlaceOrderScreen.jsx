@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Divider from "@material-ui/core/Divider";
 import moment from "moment";
@@ -14,26 +14,11 @@ const PlaceOrderScreen = (props) => {
   const discountCode = useSelector((state) => state.discountCode)[0];
 
   const paymentMethodID = paymentDetails.paymentMethod === "Kartično" ? 1 : 2;
-  const discountCodeID = discountCode?.id ? discountCode.id : 0;
+  const discountCodeID = discountCode?.id ? discountCode.id : "";
 
   const convertPrice = (number) => {
     return Number(number.toFixed(2));
   };
-
-  useEffect(() => {
-    const testiranjeAPI = async () => {
-      await api
-        .post("/brands", { naziv: "brand v2" })
-        .then((data) => {
-          console.log("DATA: ", data);
-        })
-        .catch((error) => {
-          console.log("ERROR: ", error);
-        });
-    };
-
-    testiranjeAPI();
-  }, []);
 
   cart.itemsPrice = convertPrice(
     cart.reduce((a, c) => a + c.kolicina * c.cijena, 0)
@@ -88,7 +73,13 @@ const PlaceOrderScreen = (props) => {
       console.log("ORDER FOR ADD PRODUCTS: ", createdOrder);
 
       await api
-        .post(`orders/${createdOrder.id}/products`, cart)
+        .post(
+          `orders/${createdOrder.id}/products`,
+          cart.map((product) => {
+            product.dostupnaKolicina = product.kolicina;
+            return product;
+          })
+        )
         .then(({ data }) => console.log("DATA: ", data))
         .catch((error) => console.log("ERROR: ", error));
     };
@@ -99,6 +90,18 @@ const PlaceOrderScreen = (props) => {
 
     props.history.push("/");
   };
+
+  console.log("CART: ", cart);
+
+  console.log(
+    "CART UPDATED: ",
+    cart.map((product) => {
+      product.dostupnaKolicina = product.kolicina;
+      console.log("UPDATED PRODUCT: ", product);
+
+      return product;
+    })
+  );
 
   return (
     <div>
