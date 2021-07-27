@@ -49,6 +49,8 @@ export const removeAllFromCart = () => async (dispatch) => {
   dispatch({ type: CART_EMPTY });
 
   localStorage.removeItem("cartItems");
+  localStorage.removeItem("paymentDetails");
+  localStorage.removeItem("discountCode");
 };
 
 export const saveOrderDetails = (data) => async (dispatch) => {

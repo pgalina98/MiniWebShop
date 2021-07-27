@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Divider from "@material-ui/core/Divider";
 import moment from "moment";
@@ -9,8 +9,8 @@ import api from "../utils/api";
 
 const PlaceOrderScreen = (props) => {
   const cart = useSelector((state) => state.cart);
-  const orderDetails = useSelector((state) => state.orderDetails);
-  const paymentDetails = useSelector((state) => state.paymentDetails);
+  const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+  const paymentDetails = JSON.parse(localStorage.getItem("paymentDetails"));
   const discountCode = useSelector((state) => state.discountCode)[0];
 
   const paymentMethodID = paymentDetails.paymentMethod === "Kartično" ? 1 : 2;
@@ -19,6 +19,21 @@ const PlaceOrderScreen = (props) => {
   const convertPrice = (number) => {
     return Number(number.toFixed(2));
   };
+
+  useEffect(() => {
+    const testiranjeAPI = async () => {
+      await api
+        .post("/brands", { naziv: "brand v2" })
+        .then((data) => {
+          console.log("DATA: ", data);
+        })
+        .catch((error) => {
+          console.log("ERROR: ", error);
+        });
+    };
+
+    testiranjeAPI();
+  }, []);
 
   cart.itemsPrice = convertPrice(
     cart.reduce((a, c) => a + c.kolicina * c.cijena, 0)
@@ -97,15 +112,15 @@ const PlaceOrderScreen = (props) => {
                 <Divider />
                 <p>
                   <strong>Email address: </strong>
-                  {JSON.parse(orderDetails).emailAddress}
+                  {orderDetails.emailAddress}
                   <br />
                   <br />
                   <strong>Phone number: </strong>
-                  {JSON.parse(orderDetails).phoneNumber}
+                  {orderDetails.phoneNumber}
                   <br />
                   <br />
                   <strong>Shipping address: </strong>
-                  {JSON.parse(orderDetails).shippingAddress}
+                  {orderDetails.shippingAddress}
                 </p>
               </div>
             </li>
@@ -115,7 +130,7 @@ const PlaceOrderScreen = (props) => {
                 <Divider />
                 <p>
                   <strong>Payment Method: </strong>
-                  {JSON.parse(paymentDetails).paymentMethod}
+                  {paymentDetails.paymentMethod}
                 </p>
                 <br />
               </div>

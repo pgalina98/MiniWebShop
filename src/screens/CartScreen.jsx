@@ -52,7 +52,7 @@ const CartScreen = (props) => {
           <ul>
             {cart.map((cartItem) => {
               return (
-                <li key={cartItem.id + "ABCDE"}>
+                <li key={cartItem.id}>
                   <div className="row">
                     <div>
                       <img
